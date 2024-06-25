@@ -1,17 +1,26 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const users = [{ id: 1, username: 'admin', password: '$2b$10$abcd...'}]; // senha "admin" criptografada
+const db = require('../config/db');
+require('dotenv').config();
 
-exports.login = (req, res) => {
-    const { username, password } = req.body;
-    const user = users.find(u => u.username === username);
+const secret = process.env.JWT_SECRET;
 
-    if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+const generateToken = (user) => {
+  return jwt.sign({ id: user.id, email: user.email }, secret, { expiresIn: '1h' });
+};
 
-    bcrypt.compare(password, user.password, (err, result) => {
-        if (err || !result) return res.status(401).json({ message: 'Invalid credentials' });
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
 
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
-    });
+  try {
+    const [rows] = await db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password]);
+    if (rows.length > 0) {
+      const user = rows[0];
+      const token = generateToken(user);
+      res.json({ token });
+    } else {
+      res.status(401).json({ error: 'Credenciais inválidas' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
