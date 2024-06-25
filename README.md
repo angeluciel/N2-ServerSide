@@ -4,8 +4,8 @@
 This serverside product controller was made using json webtoken, express and mariaDB for a datbase.
 
 ## Contents
-- [ X ] Category
-- [ X ] Auth
-- [ X ] Order
-- [ X ] Products
-- [ X ] Middleware
+- [X]  Category
+- [X] Auth
+- [X] Order
+- [X] Products
+- [X] Middleware
