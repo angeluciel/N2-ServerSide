@@ -9,4 +9,14 @@ const Order = {
     }
 };
 
+exports.createOrderItem = async (orderItem) => {
+    const { num_pedido, cod_produto, qtde_pedido } = orderItem;
+    try {
+        const [result] = await db.execute('INSERT INTO orders (num_pedido, cod_produto, qtde_pedido) VALUES (?, ?, ?)', [num_pedido, cod_produto, qtde_pedido]);
+        return result;
+    } catch (error) {
+        throw error;
+    }
+};
+
 module.exports = Order;

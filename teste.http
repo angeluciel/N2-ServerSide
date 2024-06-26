@@ -10,7 +10,46 @@ Content-Type: application/json
 ### Acessar Rota Protegida
 
 GET http://localhost:3000/api/protected
-Authorization: Bearer <eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2FvIiwiaWF0IjoxNzE5MzUwMTYxLCJleHAiOjE3MTkzNTM3NjF9.ZZWidEfh7WOlhLVhBNszsVsloJxgaWmVMjlNHnQ8tpo>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2FvIiwiaWF0IjoxNzE5MzY0MjQ2LCJleHAiOjE3MTkzNjc4NDZ9.MDD5YwoT6oGgHSN3ueExoqa8duQ-eSnJaCCz7MMUvwE
 
-## Post
+### POST Request criar produto
 POST http://localhost:3000/api/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2FvIiwiaWF0IjoxNzE5MzU4Nzg3LCJleHAiOjE3MTkzNjIzODd9.5bQQxiuBAOYbs7GGtpohoOIsJwHqQw_M1K29ROY3DKE
+Content-Type: application/json
+
+{
+  "cod_produto": 13,
+  "nome_produto": "maço",
+  "qtde_produto": 5,
+  "id_categoria": 2
+}
+
+### POST categorias
+POST http://localhost:3000/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2FvIiwiaWF0IjoxNzE5MzU4Nzg3LCJleHAiOjE3MTkzNjIzODd9.5bQQxiuBAOYbs7GGtpohoOIsJwHqQw_M1K29ROY3DKE
+Content-Type: application/json
+
+{
+  "nome_categoria": "Musculo Pancreatico"
+}
+
+### Update categorias
+PUT http://localhost:3000/api/categories/9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2FvIiwiaWF0IjoxNzE5MzU4Nzg3LCJleHAiOjE3MTkzNjIzODd9.5bQQxiuBAOYbs7GGtpohoOIsJwHqQw_M1K29ROY3DKE
+Content-Type: application/json
+
+{
+  "nome_categoria": "Macarrao"
+}
+
+### Get produto por ID de categoria
+GET http://localhost:3000/api/products/category/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2FvIiwiaWF0IjoxNzE5MzU4Nzg3LCJleHAiOjE3MTkzNjIzODd9.5bQQxiuBAOYbs7GGtpohoOIsJwHqQw_M1K29ROY3DKE
+Content-Type: application/json
+
+###
+
+### Get por quantidade
+GET http://localhost:3000/api/products/order?qtde_pedido=5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2FvIiwiaWF0IjoxNzE5MzU4Nzg3LCJleHAiOjE3MTkzNjIzODd9.5bQQxiuBAOYbs7GGtpohoOIsJwHqQw_M1K29ROY3DKE
+Content-Type: application/json

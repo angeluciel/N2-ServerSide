@@ -1,38 +1,53 @@
 const Category = require('../models/categoryModel');
 
-exports.getCategories = (req, res) => {
-    Category.getAll((err, results) => {
-        if (err) res.status(500).send(err);
+exports.getCategories = async (req, res) => {
+    try {
+        const results = await Category.getAll();
         res.json(results);
-    });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erro ao buscar categorias' });
+    }
 };
 
-exports.getCategoryById = (req, res) => {
-    Category.getById(req.params.id, (err, result) => {
-        if (err) res.status(500).send(err);
+exports.getCategoryById = async (req, res) => {
+    try {
+        const result = await Category.getById(req.params.id);
         res.json(result);
-    });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erro ao buscar categoria por ID' });
+    }
 };
 
-exports.createCategory = (req, res) => {
-    const newCategory = req.body;
-    Category.create(newCategory, (err, result) => {
-        if (err) res.status(500).send(err);
-        res.json(result);
-    });
+exports.createCategory = async (req, res) => {
+    try {
+        const newCategory = req.body;
+        const result = await Category.create(newCategory);
+        res.status(201).json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erro ao criar nova categoria' });
+    }
 };
 
-exports.updateCategory = (req, res) => {
-    const updatedCategory = req.body;
-    Category.update(req.params.id, updatedCategory, (err, result) => {
-        if (err) res.status(500).send(err);
+exports.updateCategory = async (req, res) => {
+    try {
+        const updatedCategory = req.body;
+        const result = await Category.update(req.params.id, updatedCategory);
         res.json(result);
-    });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erro ao atualizar categoria' });
+    }
 };
 
-exports.deleteCategory = (req, res) => {
-    Category.delete(req.params.id, (err, result) => {
-        if (err) res.status(500).send(err);
+exports.deleteCategory = async (req, res) => {
+    try {
+        const result = await Category.delete(req.params.id);
         res.json(result);
-    });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erro ao deletar categoria' });
+    }
 };
